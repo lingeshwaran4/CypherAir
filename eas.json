@@ -1,0 +1,39 @@
+{
+  "cli": {
+    "version": ">= 18.8.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "ANDROID_PACKAGE_NAME": "com.cypherair.app",
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "ANDROID_PACKAGE_NAME": "com.cypherair.app",
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "ANDROID_PACKAGE_NAME": "com.cypherair.app",
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
