@@ -1,20 +1,26 @@
 export default ({ config }) => {
+  const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+
+  if (!googleMapsApiKey) {
+    console.warn('WARNING: GOOGLE_MAPS_API_KEY is not set. Map will crash on Android.');
+  }
+
   return {
     ...config,
     android: {
       ...config.android,
-      package: process.env.ANDROID_PACKAGE_NAME || "com.cypherair.app",
+      package: process.env.ANDROID_PACKAGE_NAME || 'com.cypherair.app',
       config: {
         googleMaps: {
-          apiKey: process.env.GOOGLE_MAPS_API_KEY,
+          apiKey: googleMapsApiKey || '',
         },
       },
     },
     ios: {
       ...config.ios,
-      bundleIdentifier: process.env.IOS_BUNDLE_IDENTIFIER || "com.cypherair.app",
+      bundleIdentifier: process.env.IOS_BUNDLE_IDENTIFIER || 'com.cypherair.app',
       config: {
-        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: googleMapsApiKey || '',
       },
     },
     web: {
@@ -23,7 +29,7 @@ export default ({ config }) => {
     },
     extra: {
       ...config.extra,
-      googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      googleMapsApiKey: googleMapsApiKey,
     },
   };
 };

@@ -9,7 +9,8 @@
       "distribution": "internal",
       "env": {
         "ANDROID_PACKAGE_NAME": "com.cypherair.app",
-        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app",
+        "GOOGLE_MAPS_API_KEY": "@GOOGLE_MAPS_API_KEY"
       }
     },
     "preview": {
@@ -22,14 +23,16 @@
       },
       "env": {
         "ANDROID_PACKAGE_NAME": "com.cypherair.app",
-        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app",
+        "GOOGLE_MAPS_API_KEY": "@GOOGLE_MAPS_API_KEY"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
         "ANDROID_PACKAGE_NAME": "com.cypherair.app",
-        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app"
+        "IOS_BUNDLE_IDENTIFIER": "com.cypherair.app",
+        "GOOGLE_MAPS_API_KEY": "@GOOGLE_MAPS_API_KEY"
       }
     }
   },
