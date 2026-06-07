@@ -1,19 +1,79 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   ScrollView,
   SafeAreaView,
-  TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { MOCK_DATA } from '@/services/api';
+import { api, MOCK_DATA } from '@/services/api';
 import { getAQILevel } from '@/services/aqi';
 
 export default function HomeScreen() {
-  const aqiInfo = getAQILevel(MOCK_DATA.current_aqi);
+  const [data, setData] = useState(MOCK_DATA);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await api.getCurrentAQI();
+        console.log('API Result:', result);
+        if (result && result.success) {
+          setData({
+            current_aqi: Number(result.aqi || MOCK_DATA.current_aqi) || 0,
+            pm25: Number(result.pm25 || MOCK_DATA.pm25) || 0,
+            temperature: Number(result.temperature || MOCK_DATA.temperature) || 0,
+            humidity: Number(result.humidity || MOCK_DATA.humidity) || 0,
+            wind_speed: Number(result.wind_speed || MOCK_DATA.wind_speed) || 0,
+            wind_direction: result.wind_direction || MOCK_DATA.wind_direction || 'Variable',
+            pressure: Number(result.pressure || MOCK_DATA.pressure) || 1012,
+            boundary_layer: Number(result.boundary_layer || MOCK_DATA.boundary_layer) || 450,
+            station: result.station || MOCK_DATA.station,
+            hotspots: result.hotspots && result.hotspots.length > 0 ? result.hotspots : MOCK_DATA.hotspots,
+            updated_at: result.updated_at
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch AQI:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+    const interval = setInterval(fetchData, 60000); // Check every minute
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#00D4FF" />
+      </View>
+    );
+  }
+
+  const currentAqi = Number(data.current_aqi) || 0;
+  const aqiInfo = getAQILevel(currentAqi);
+  
+  // Format the relative time
+  const getRelativeTime = (isoString: string) => {
+    if (!isoString) return 'Just now';
+    const updated = new Date(isoString);
+    const now = new Date();
+    const diffMs = now.getTime() - updated.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    
+    if (diffMins <= 0) return 'Just now';
+    if (diffMins < 60) return `${diffMins} min${diffMins > 1 ? 's' : ''} ago`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    return updated.toLocaleDateString();
+  };
+
+  const lastUpdated = getRelativeTime(data.updated_at);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,17 +83,17 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Cypher Air</Text>
           <View style={styles.locationContainer}>
-            <Text style={styles.locationText}>North Chennai</Text>
+            <Text style={styles.locationText}>{data.station}</Text>
             <Ionicons name="location" size={18} color="#00D4FF" />
           </View>
         </View>
 
         {/* Section 2 — Main AQI card */}
         <View style={styles.mainCard}>
-          <Text style={styles.stationName}>{MOCK_DATA.station}</Text>
+          <Text style={styles.stationName}>Current Street: {data.station}</Text>
           <View style={styles.aqiContainer}>
             <Text style={[styles.aqiNumber, { color: aqiInfo.color }]}>
-              {MOCK_DATA.current_aqi}
+              {data.current_aqi}
             </Text>
             <View style={[styles.aqiBadge, { backgroundColor: aqiInfo.bg }]}>
               <Text style={[styles.aqiBadgeText, { color: aqiInfo.color }]}>
@@ -42,8 +102,14 @@ export default function HomeScreen() {
             </View>
           </View>
           <View style={styles.cardFooter}>
-            <Text style={styles.footerText}>PM2.5 {MOCK_DATA.pm25} µg/m³</Text>
-            <Text style={styles.footerText}>Updated 5 min ago</Text>
+            <View style={styles.footerRow}>
+              <Ionicons name="leaf" size={14} color="#8892A4" />
+              <Text style={styles.footerText}>PM2.5: {data.pm25} µg/m³</Text>
+            </View>
+            <View style={styles.footerRow}>
+              <View style={styles.liveDot} />
+              <Text style={styles.footerText}>{lastUpdated}</Text>
+            </View>
           </View>
         </View>
 
@@ -51,22 +117,22 @@ export default function HomeScreen() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.weatherStrip}>
           <View style={styles.weatherCard}>
             <Ionicons name="thermometer" size={20} color="#00D4FF" />
-            <Text style={styles.weatherValue}>{MOCK_DATA.temperature}°C</Text>
+            <Text style={styles.weatherValue}>{data.temperature}°C</Text>
             <Text style={styles.weatherLabel}>Temperature</Text>
           </View>
           <View style={styles.weatherCard}>
             <Ionicons name="water" size={20} color="#00D4FF" />
-            <Text style={styles.weatherValue}>{MOCK_DATA.humidity}%</Text>
+            <Text style={styles.weatherValue}>{data.humidity}%</Text>
             <Text style={styles.weatherLabel}>Humidity</Text>
           </View>
           <View style={styles.weatherCard}>
             <Ionicons name="arrow-up" size={20} color="#00D4FF" style={{ transform: [{ rotate: '315deg' }] }} />
-            <Text style={styles.weatherValue}>{MOCK_DATA.wind_speed} km/h</Text>
-            <Text style={styles.weatherLabel}>Wind {MOCK_DATA.wind_direction}</Text>
+            <Text style={styles.weatherValue}>{data.wind_speed} km/h</Text>
+            <Text style={styles.weatherLabel}>Wind {data.wind_direction}</Text>
           </View>
           <View style={styles.weatherCard}>
             <Ionicons name="layers" size={20} color="#00D4FF" />
-            <Text style={styles.weatherValue}>{MOCK_DATA.boundary_layer}m</Text>
+            <Text style={styles.weatherValue}>{data.boundary_layer}m</Text>
             <Text style={styles.weatherLabel}>Boundary Layer</Text>
           </View>
         </ScrollView>
@@ -75,15 +141,16 @@ export default function HomeScreen() {
         <Text style={styles.sectionTitle}>Active Hotspots</Text>
 
         {/* Section 5 — Hotspot cards */}
-        {MOCK_DATA.hotspots.map((hotspot, index) => {
-          const hotspotAqi = getAQILevel(hotspot.aqi);
+        {data.hotspots.map((hotspot, index) => {
+          const hAqi = Number(hotspot.aqi) || 0;
+          const hotspotAqi = getAQILevel(hAqi);
           return (
             <View key={index} style={styles.hotspotCard}>
               <View style={[styles.statusDot, { backgroundColor: hotspotAqi.color }]} />
               <View style={styles.hotspotInfo}>
                 <Text style={styles.hotspotName}>{hotspot.name}</Text>
                 <Text style={[styles.hotspotAqi, { color: hotspotAqi.color }]}>
-                  AQI: {hotspot.aqi}
+                  AQI: {hAqi}
                 </Text>
               </View>
               <View style={[styles.levelBadge, { backgroundColor: hotspotAqi.bg }]}>
@@ -101,8 +168,7 @@ export default function HomeScreen() {
         {/* Section 7 — Horizontal scrollable forecast strip */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.forecastStrip}>
           {[6, 12, 18, 24].map((h) => {
-            // Mock variation
-            const forecastAqi = MOCK_DATA.current_aqi + (h === 6 ? 20 : h === 12 ? -10 : h === 18 ? 40 : 10);
+            const forecastAqi = currentAqi + (h === 6 ? 20 : h === 12 ? -10 : h === 18 ? 40 : 10);
             const info = getAQILevel(forecastAqi);
             return (
               <View key={h} style={styles.forecastCard}>
@@ -191,6 +257,18 @@ const styles = StyleSheet.create({
   footerText: {
     color: '#8892A4',
     fontSize: 12,
+  },
+  footerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  liveDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#00C853',
+    marginRight: 2,
   },
   weatherStrip: {
     marginBottom: 24,

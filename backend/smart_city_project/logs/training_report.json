@@ -1,38 +1,38 @@
 {
-    "trained_at": "2026-05-02T14:22:26.415455",
-    "total_rows": 5429,
+    "trained_at": "2026-05-13T15:41:15.315506",
+    "total_rows": 5280,
     "results": [
         {
             "horizon": "t+6h",
-            "mae": 4.138818763326978,
-            "rmse": 5.23920155355796,
-            "index_of_agreement": 0.9443147537539045,
-            "train_rows": 4199,
-            "test_rows": 1050
+            "mae": 4.075044656962476,
+            "rmse": 5.233445224760487,
+            "index_of_agreement": 0.9430028288200211,
+            "train_rows": 4080,
+            "test_rows": 1020
         },
         {
             "horizon": "t+12h",
-            "mae": 4.085908764491938,
-            "rmse": 5.202135172669539,
-            "index_of_agreement": 0.9436730099712711,
-            "train_rows": 4055,
-            "test_rows": 1014
+            "mae": 4.074899255867314,
+            "rmse": 5.226869802985863,
+            "index_of_agreement": 0.9439615440292768,
+            "train_rows": 3936,
+            "test_rows": 984
         },
         {
             "horizon": "t+18h",
-            "mae": 4.115273714332087,
-            "rmse": 5.239589039970279,
-            "index_of_agreement": 0.9440964420883111,
-            "train_rows": 3911,
-            "test_rows": 978
+            "mae": 4.060695673358558,
+            "rmse": 5.184640954403195,
+            "index_of_agreement": 0.9445379382608552,
+            "train_rows": 3792,
+            "test_rows": 948
         },
         {
             "horizon": "t+24h",
-            "mae": 4.092362213996515,
-            "rmse": 5.2309331065523486,
-            "index_of_agreement": 0.9425814168352509,
-            "train_rows": 3767,
-            "test_rows": 942
+            "mae": 4.07068543570223,
+            "rmse": 5.152684183753669,
+            "index_of_agreement": 0.9454821319536336,
+            "train_rows": 3648,
+            "test_rows": 912
         }
     ]
 }

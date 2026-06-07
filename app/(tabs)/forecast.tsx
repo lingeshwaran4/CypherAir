@@ -31,7 +31,8 @@ export default function ForecastScreen() {
     });
   }, []);
 
-  const forecastAqi = 168 + (selectedHorizon === 6 ? 25 : selectedHorizon === 12 ? -15 : selectedHorizon === 18 ? 45 : 15);
+  const baseAqi = Number(MOCK_DATA.current_aqi) || 0;
+  const forecastAqi = baseAqi + (selectedHorizon === 6 ? 25 : selectedHorizon === 12 ? -15 : selectedHorizon === 18 ? 45 : 15);
   const aqiInfo = getAQILevel(forecastAqi);
 
   return (
@@ -69,12 +70,12 @@ export default function ForecastScreen() {
           </View>
           <View style={styles.summaryGrid}>
             <View style={styles.gridItem}>
-              <Text style={styles.gridValue}>{MOCK_DATA.pm25 + 5}</Text>
+              <Text style={styles.gridValue}>{(Number(MOCK_DATA.pm25) || 0) + 5}</Text>
               <Text style={styles.gridLabel}>PM2.5</Text>
             </View>
             <View style={styles.gridDivider} />
             <View style={styles.gridItem}>
-              <Text style={styles.gridValue}>{MOCK_DATA.temperature - 2}°C</Text>
+              <Text style={styles.gridValue}>{(Number(MOCK_DATA.temperature) || 0) - 2}°C</Text>
               <Text style={styles.gridLabel}>Temp</Text>
             </View>
             <View style={styles.gridDivider} />
@@ -93,7 +94,8 @@ export default function ForecastScreen() {
         {/* Section 3 — Station forecast list */}
         <Text style={styles.sectionTitle}>Station Predictions</Text>
         {MOCK_DATA.hotspots.map((hotspot, index) => {
-          const prediction = hotspot.aqi + (selectedHorizon === 6 ? 15 : -5);
+          const hotspotAqi = Number(hotspot.aqi) || 0;
+          const prediction = hotspotAqi + (selectedHorizon === 6 ? 15 : -5);
           const info = getAQILevel(prediction);
           const confidence = 95 - (index * 5) - (selectedHorizon / 6 * 2);
           return (

@@ -5,23 +5,24 @@ import time
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
-
-# Get the absolute path of the backend directory (parent of services)
+# Resolve backend directory relative to this file
 BACKEND_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_SMART_CITY_PATH = BACKEND_DIR / "smart_city_project"
 
-# Allow override via env, but default to the robust local path
-SMART_CITY_PATH = os.getenv("SMART_CITY_PATH")
-if SMART_CITY_PATH:
-    p = Path(SMART_CITY_PATH)
+# Load environment variables from backend directory
+load_dotenv(BACKEND_DIR / ".env")
+
+# Set default smart_city_project path
+smart_city_full_path = BACKEND_DIR / "smart_city_project"
+
+# Override with environment variable if it exists and is absolute
+env_path = os.getenv("SMART_CITY_PATH")
+if env_path:
+    p = Path(env_path)
     if p.is_absolute():
-        smart_city_full_path = p.resolve()
+        smart_city_full_path = p
     else:
         # Resolve relative to the backend directory
         smart_city_full_path = (BACKEND_DIR / p).resolve()
-else:
-    smart_city_full_path = DEFAULT_SMART_CITY_PATH
 
 # Add smart_city_project to sys.path
 if str(smart_city_full_path) not in sys.path:
@@ -112,6 +113,81 @@ def get_all_predictions():
 
     except Exception as e:
         print(f"Error in get_all_predictions: {e}")
+        return []
+
+def get_current_summary_data():
+    """
+    Returns the latest summary data from final_dataset.csv.
+    """
+    try:
+        dataset_path = smart_city_full_path / "final_dataset.csv"
+        if not dataset_path.exists():
+            return None
+            
+        df = pd.read_csv(dataset_path)
+        if df.empty:
+            return None
+            
+        # Get the latest timestamp
+        latest_time = df['time'].max()
+        df_latest = df[df['time'] == latest_time]
+        
+        # Calculate averages for the area
+        summary = {
+            "aqi": float(round(df_latest['sensor_aqi'].mean(), 1)) if not df_latest.empty else 0.0,
+            "pm25": float(round(df_latest['pm25'].mean(), 1)) if not df_latest.empty else 0.0,
+            "temperature": float(round(df_latest['temp'].mean(), 1)) if not df_latest.empty else 0.0,
+            "humidity": float(round(df_latest['humidity'].mean(), 1)) if not df_latest.empty else 0.0,
+            "wind_speed": float(round(df_latest['wind_speed'].mean(), 1)) if not df_latest.empty else 0.0,
+            "updated_at": (latest_time.replace(' ', 'T') if isinstance(latest_time, str) else latest_time) if not df_latest.empty else datetime.datetime.now().isoformat(),
+            "station": df_latest.iloc[0]['street_id'].replace('_', ' ') if not df_latest.empty else "North Chennai"
+        }
+        
+        # Ensure no NaNs make it through
+        for key in ["aqi", "pm25", "temperature", "humidity", "wind_speed"]:
+            if pd.isna(summary[key]):
+                summary[key] = 0.0
+        return summary
+    except Exception as e:
+        print(f"Error in get_current_summary_data: {e}")
+        return None
+
+def get_latest_street_data():
+    """
+    Returns the latest reading for every street in final_dataset.csv.
+    """
+    try:
+        dataset_path = smart_city_full_path / "final_dataset.csv"
+        if not dataset_path.exists():
+            return []
+            
+        df = pd.read_csv(dataset_path)
+        if df.empty:
+            return []
+            
+        # Get the latest timestamp for each street
+        df_latest = df.sort_values('time').groupby('street_id').tail(1)
+        
+        results = []
+        for _, row in df_latest.iterrows():
+            results.append({
+                "id": row['street_id'],
+                "name": row['street_id'].replace('_', ' '),
+                "lat": float(row['lat']),
+                "lon": float(row['lon']),
+                "aqi": float(round(float(row['sensor_aqi']), 1)) if not pd.isna(row['sensor_aqi']) else 0.0,
+                "pm25": float(round(float(row['pm25']), 1)) if not pd.isna(row['pm25']) else 0.0,
+                "temperature": float(round(float(row['temp']), 1)) if not pd.isna(row['temp']) else 0.0,
+                "humidity": float(round(float(row['humidity']), 1)) if not pd.isna(row['humidity']) else 0.0,
+                "wind_speed": float(round(float(row['wind_speed']), 1)) if not pd.isna(row['wind_speed']) else 0.0,
+                "wind_direction": "N/A",
+                "pressure": 1012.0,
+                "boundary_layer": 450,
+                "city": row['city']
+            })
+        return results
+    except Exception as e:
+        print(f"Error in get_latest_street_data: {e}")
         return []
 
 if __name__ == "__main__":

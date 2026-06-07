@@ -22,7 +22,8 @@ const TIMELINE_ALERTS = [
 
 export default function AlertsScreen() {
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
-  const currentAqiInfo = getAQILevel(MOCK_DATA.current_aqi);
+  const currentAqi = Number(MOCK_DATA.current_aqi) || 0;
+  const currentAqiInfo = getAQILevel(currentAqi);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +36,7 @@ export default function AlertsScreen() {
             <Text style={styles.bannerSubtitle}>{currentAqiInfo.label} levels detected in your area</Text>
           </View>
           <View style={[styles.bannerBadge, { backgroundColor: currentAqiInfo.color }]}>
-            <Text style={styles.bannerBadgeText}>{MOCK_DATA.current_aqi}</Text>
+            <Text style={styles.bannerBadgeText}>{currentAqi}</Text>
           </View>
         </View>
 

@@ -1,7 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import {
   useFonts,
@@ -28,11 +28,20 @@ export default function RootLayout() {
     Inter_700Bold,
   });
 
+  const [timePassed, setTimePassed] = useState(false);
+
   useEffect(() => {
-    if (loaded || error) {
+    const timer = setTimeout(() => {
+      setTimePassed(true);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if ((loaded || error) && timePassed) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, error]);
+  }, [loaded, error, timePassed]);
 
   if (!loaded && !error) {
     return null;

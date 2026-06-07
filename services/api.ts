@@ -1,6 +1,10 @@
 // import axios from 'axios'; // Replaced with fetch to comply with "no new packages" constraint
 
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000';
+import { Platform } from 'react-native';
+
+const BASE_URL = Platform.OS === 'web' 
+  ? 'http://localhost:5000' 
+  : 'http://192.168.29.27:5000';
 
 export const MOCK_DATA = {
   current_aqi: 168,
@@ -25,7 +29,7 @@ export const api = {
       const res = await fetch(`${BASE_URL}/api/current`);
       return await res.json();
     } catch {
-      return MOCK_DATA;
+      return { ...MOCK_DATA, success: true };
     }
   },
   getForecast: async (horizon: number) => {
@@ -33,7 +37,7 @@ export const api = {
       const res = await fetch(`${BASE_URL}/api/forecast/${horizon}`);
       return await res.json();
     } catch {
-      return { horizon, stations: MOCK_DATA.hotspots };
+      return { horizon, stations: MOCK_DATA.hotspots, success: true };
     }
   },
   getRisk: async (profile: string, horizon: number) => {
@@ -41,7 +45,15 @@ export const api = {
       const res = await fetch(`${BASE_URL}/api/risk/${profile}/${horizon}`);
       return await res.json();
     } catch {
-      return { risk: 'MEDIUM', message: 'Moderate air quality forecast.' };
+      return { risk: 'MEDIUM', message: 'Moderate air quality forecast.', success: true };
+    }
+  },
+  getPredictions: async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/predictions`);
+      return await res.json();
+    } catch {
+      return [];
     }
   },
 };

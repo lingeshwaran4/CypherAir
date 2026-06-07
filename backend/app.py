@@ -8,12 +8,10 @@ from routes.current import current_bp
 from routes.forecast import forecast_bp
 from routes.risk import risk_bp
 
-# Load environment variables
-load_dotenv()
-
-# Validate models on startup
-SMART_CITY_PATH = os.getenv("SMART_CITY_PATH", "./smart_city_project")
-smart_city_full_path = os.path.abspath(SMART_CITY_PATH)
+# Resolve paths relative to this file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Force the smart_city_project path to be inside the backend folder
+smart_city_full_path = os.path.abspath(os.path.join(BASE_DIR, "smart_city_project"))
 
 print(f"Validating models in {smart_city_full_path}...")
 horizons = [6, 12, 18, 24]
