@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, abort
 from services.mock_data import STATIONS, FORECAST_DATA, WEATHER_FORECAST, CURRENT_CONDITIONS, generate_24h_timeline
 from services.aqi_calculator import get_aqi_level
+from services.predictor import get_all_predictions, get_aqi_category
+from services.kriging_service import get_kriging
 import datetime
 import time
 
@@ -74,3 +76,34 @@ def get_all_forecasts():
         
     print(f"GET /api/forecast/all - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
     return jsonify({"success": True, "data": all_data})
+
+@forecast_bp.route("/api/forecast/<string:street_id>", methods=["GET"])
+def get_street_forecast(street_id):
+    start_time = time.time()
+    predictions = get_all_predictions()
+    
+    # Find the street in predictions
+    street_data = next((p for p in predictions if p["street_id"] == street_id), None)
+    
+    if not street_data:
+        abort(404, description=f"Street ID {street_id} not found.")
+        
+    response = {
+        "street_id": street_id,
+        "forecasts": [
+            {"horizon": "t+6h",  "aqi": street_data["t6"],  "category": get_aqi_category(street_data["t6"])},
+            {"horizon": "t+12h", "aqi": street_data["t12"], "category": get_aqi_category(street_data["t12"])},
+            {"horizon": "t+18h", "aqi": street_data["t18"], "category": get_aqi_category(street_data["t18"])},
+            {"horizon": "t+24h", "aqi": street_data["t24"], "category": get_aqi_category(street_data["t24"])}
+        ]
+    }
+    
+    print(f"GET /api/forecast/{street_id} - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
+    return jsonify(response)
+
+@forecast_bp.route("/api/kriging", methods=["GET"])
+def get_kriging_data():
+    start_time = time.time()
+    data = get_kriging()
+    print(f"GET /api/kriging - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
+    return jsonify(data)

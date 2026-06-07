@@ -11,6 +11,24 @@ from routes.risk import risk_bp
 # Load environment variables
 load_dotenv()
 
+# Validate models on startup
+SMART_CITY_PATH = os.getenv("SMART_CITY_PATH", "./smart_city_project")
+smart_city_full_path = os.path.abspath(SMART_CITY_PATH)
+
+print(f"Validating models in {smart_city_full_path}...")
+horizons = [6, 12, 18, 24]
+missing_models = []
+for h in horizons:
+    model_path = os.path.join(smart_city_full_path, "src", "models", "saved", f"model_t{h}.joblib")
+    if not os.path.exists(model_path):
+        missing_models.append(f"model_t{h}.joblib")
+
+if missing_models:
+    print(f"CRITICAL ERROR: Missing model files: {', '.join(missing_models)}")
+    print(f"Expected path: {os.path.join(smart_city_full_path, 'src', 'models', 'saved')}")
+else:
+    print("All ML models validated successfully.")
+
 app = Flask(__name__)
 
 # Configure CORS

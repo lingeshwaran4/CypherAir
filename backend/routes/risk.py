@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, abort
 from services.mock_data import FORECAST_DATA, CURRENT_CONDITIONS, generate_24h_timeline
 from services.risk_scorer import score_risk, safer_travel_window
+from services.predictor import get_all_predictions
 import time
 
 risk_bp = Blueprint("risk", __name__)
@@ -55,3 +56,41 @@ def get_risk_summary(profile):
         
     print(f"GET /api/risk/summary/{profile} - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
     return jsonify({"success": True, "data": summary})
+
+@risk_bp.route("/api/alerts", methods=["GET"])
+def get_alerts():
+    start_time = time.time()
+    predictions = get_all_predictions()
+    
+    alerts = []
+    for p in predictions:
+        # Check all horizons
+        horizons = [("t+6h", p["t6"]), ("t+12h", p["t12"]), ("t+18h", p["t18"]), ("t+24h", p["t24"])]
+        
+        max_aqi = 0
+        triggered_at = ""
+        
+        for horizon, aqi in horizons:
+            if aqi > 100:
+                if aqi > max_aqi:
+                    max_aqi = aqi
+                    triggered_at = horizon
+                    
+        if max_aqi > 0:
+            alert_level = "Sensitive"
+            if 151 <= max_aqi <= 200:
+                alert_level = "Unhealthy"
+            elif max_aqi > 200:
+                alert_level = "Hazardous"
+                
+            alerts.append({
+                "street_id": p["street_id"],
+                "lat": p["lat"],
+                "lon": p["lon"],
+                "max_aqi": max_aqi,
+                "alert_level": alert_level,
+                "triggered_at": triggered_at
+            })
+            
+    print(f"GET /api/alerts - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
+    return jsonify(alerts)

@@ -1,0 +1,226 @@
+{
+    "status": "ok",
+    "data": {
+        "aqi": 114,
+        "idx": 1437,
+        "attributions": [
+            {
+                "url": "http://106.37.208.233:20035/emcpublish/",
+                "name": "China National Urban air quality real-time publishing platform (\u5168\u56fd\u57ce\u5e02\u7a7a\u6c14\u8d28\u91cf\u5b9e\u65f6\u53d1\u5e03\u5e73\u53f0)"
+            },
+            {
+                "url": "https://china.usembassy-china.org.cn/embassy-consulates/shanghai/air-quality-monitor-stateair/",
+                "name": "U.S. Consulate Shanghai Air Quality Monitor"
+            },
+            {
+                "url": "https://sthj.sh.gov.cn/",
+                "name": "Shanghai Environment Monitoring Center(\u4e0a\u6d77\u5e02\u73af\u5883\u76d1\u6d4b\u4e2d\u5fc3)"
+            },
+            {
+                "url": "https://waqi.info/",
+                "name": "World Air Quality Index Project"
+            }
+        ],
+        "city": {
+            "geo": [
+                31.2047372,
+                121.4489017
+            ],
+            "name": "Shanghai (\u4e0a\u6d77)",
+            "url": "https://aqicn.org/city/shanghai",
+            "location": ""
+        },
+        "dominentpol": "pm25",
+        "iaqi": {
+            "co": {
+                "v": 9.1
+            },
+            "h": {
+                "v": 39
+            },
+            "no2": {
+                "v": 12.8
+            },
+            "o3": {
+                "v": 48.8
+            },
+            "p": {
+                "v": 1019
+            },
+            "pm10": {
+                "v": 51
+            },
+            "pm25": {
+                "v": 114
+            },
+            "so2": {
+                "v": 5.6
+            },
+            "t": {
+                "v": 18
+            },
+            "w": {
+                "v": 3.6
+            }
+        },
+        "time": {
+            "s": "2026-04-30 12:00:00",
+            "tz": "+08:00",
+            "v": 1777550400,
+            "iso": "2026-04-30T12:00:00+08:00"
+        },
+        "forecast": {
+            "daily": {
+                "o3": [
+                    {
+                        "avg": 1,
+                        "day": "2025-04-05",
+                        "max": 1,
+                        "min": 1
+                    }
+                ],
+                "pm10": [
+                    {
+                        "avg": 49,
+                        "day": "2026-04-29",
+                        "max": 59,
+                        "min": 27
+                    },
+                    {
+                        "avg": 64,
+                        "day": "2026-04-30",
+                        "max": 123,
+                        "min": 28
+                    },
+                    {
+                        "avg": 63,
+                        "day": "2026-05-01",
+                        "max": 73,
+                        "min": 42
+                    },
+                    {
+                        "avg": 52,
+                        "day": "2026-05-02",
+                        "max": 57,
+                        "min": 46
+                    },
+                    {
+                        "avg": 73,
+                        "day": "2026-05-03",
+                        "max": 112,
+                        "min": 47
+                    },
+                    {
+                        "avg": 54,
+                        "day": "2026-05-04",
+                        "max": 73,
+                        "min": 28
+                    },
+                    {
+                        "avg": 48,
+                        "day": "2026-05-05",
+                        "max": 73,
+                        "min": 26
+                    },
+                    {
+                        "avg": 38,
+                        "day": "2026-05-06",
+                        "max": 46,
+                        "min": 28
+                    }
+                ],
+                "pm25": [
+                    {
+                        "avg": 139,
+                        "day": "2026-04-29",
+                        "max": 160,
+                        "min": 89
+                    },
+                    {
+                        "avg": 147,
+                        "day": "2026-04-30",
+                        "max": 252,
+                        "min": 68
+                    },
+                    {
+                        "avg": 156,
+                        "day": "2026-05-01",
+                        "max": 174,
+                        "min": 138
+                    },
+                    {
+                        "avg": 139,
+                        "day": "2026-05-02",
+                        "max": 160,
+                        "min": 130
+                    },
+                    {
+                        "avg": 165,
+                        "day": "2026-05-03",
+                        "max": 230,
+                        "min": 138
+                    },
+                    {
+                        "avg": 139,
+                        "day": "2026-05-04",
+                        "max": 174,
+                        "min": 89
+                    },
+                    {
+                        "avg": 119,
+                        "day": "2026-05-05",
+                        "max": 160,
+                        "min": 69
+                    },
+                    {
+                        "avg": 105,
+                        "day": "2026-05-06",
+                        "max": 138,
+                        "min": 69
+                    }
+                ],
+                "uvi": [
+                    {
+                        "avg": 0,
+                        "day": "2026-04-29",
+                        "max": 0,
+                        "min": 0
+                    },
+                    {
+                        "avg": 2,
+                        "day": "2026-04-30",
+                        "max": 7,
+                        "min": 0
+                    },
+                    {
+                        "avg": 2,
+                        "day": "2026-05-01",
+                        "max": 7,
+                        "min": 0
+                    },
+                    {
+                        "avg": 1,
+                        "day": "2026-05-02",
+                        "max": 7,
+                        "min": 0
+                    },
+                    {
+                        "avg": 1,
+                        "day": "2026-05-03",
+                        "max": 4,
+                        "min": 0
+                    },
+                    {
+                        "avg": 2,
+                        "day": "2026-05-04",
+                        "max": 8,
+                        "min": 0
+                    }
+                ]
+            }
+        },
+        "debug": {
+            "sync": "2026-04-30T13:47:16+09:00"
+        }
+    }
+}

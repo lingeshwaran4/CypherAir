@@ -1,0 +1,9 @@
+# Requirements for Data-Centric XGBoost AQI Project
+pandas
+numpy
+scikit-learn
+xgboost
+jupyter
+matplotlib
+seaborn
+pyyaml

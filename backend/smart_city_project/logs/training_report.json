@@ -1,0 +1,38 @@
+{
+    "trained_at": "2026-05-02T14:22:26.415455",
+    "total_rows": 5429,
+    "results": [
+        {
+            "horizon": "t+6h",
+            "mae": 4.138818763326978,
+            "rmse": 5.23920155355796,
+            "index_of_agreement": 0.9443147537539045,
+            "train_rows": 4199,
+            "test_rows": 1050
+        },
+        {
+            "horizon": "t+12h",
+            "mae": 4.085908764491938,
+            "rmse": 5.202135172669539,
+            "index_of_agreement": 0.9436730099712711,
+            "train_rows": 4055,
+            "test_rows": 1014
+        },
+        {
+            "horizon": "t+18h",
+            "mae": 4.115273714332087,
+            "rmse": 5.239589039970279,
+            "index_of_agreement": 0.9440964420883111,
+            "train_rows": 3911,
+            "test_rows": 978
+        },
+        {
+            "horizon": "t+24h",
+            "mae": 4.092362213996515,
+            "rmse": 5.2309331065523486,
+            "index_of_agreement": 0.9425814168352509,
+            "train_rows": 3767,
+            "test_rows": 942
+        }
+    ]
+}

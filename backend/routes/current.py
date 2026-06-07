@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from services.mock_data import STATIONS, CURRENT_CONDITIONS, HOTSPOTS
 from services.aqi_calculator import get_aqi_level
+from services.predictor import get_all_predictions
 import datetime
 import time
 
@@ -64,3 +65,10 @@ def get_all_stations():
     
     print(f"GET /api/stations - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
     return jsonify({"success": True, "data": all_readings})
+
+@current_bp.route("/api/predictions", methods=["GET"])
+def get_predictions():
+    start_time = time.time()
+    predictions = get_all_predictions()
+    print(f"GET /api/predictions - 200 - {round((time.time() - start_time) * 1000, 2)}ms")
+    return jsonify(predictions)

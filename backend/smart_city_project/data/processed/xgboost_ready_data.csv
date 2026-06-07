@@ -1,0 +1,121 @@
+time,street_id,AQI_Target,temp,humidity,wind,traffic,industrial_pollution,dist_to_ind
+2026-05-01 16:00:00,Thazhankuppam_St_01,105.3,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.72
+2026-05-01 16:00:00,Thazhankuppam_St_02,101.2,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.68
+2026-05-01 16:00:00,Thazhankuppam_St_03,109.3,33.2,68.0,6.7,33.5,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.83
+2026-05-01 16:00:00,Thazhankuppam_St_04,114.5,33.2,68.0,6.7,33.5,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.8
+2026-05-01 16:00:00,Thazhankuppam_St_05,102.9,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.81
+2026-05-01 16:00:00,Thazhankuppam_St_06,92.3,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.85
+2026-05-01 16:00:00,Thazhankuppam_St_07,107.3,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.88
+2026-05-01 16:00:00,Thazhankuppam_St_08,98.6,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.89
+2026-05-01 16:00:00,Thazhankuppam_St_09,103.1,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.9
+2026-05-01 16:00:00,Thazhankuppam_St_10,101.2,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.92
+2026-05-01 16:00:00,Thazhankuppam_St_11,100.9,33.2,68.0,6.7,30.0,"industry_id
+Ashok_Leyland_Ennore    141.95
+Ashok_Leyland_Ennore    182.36
+Name: emission_intensity, dtype: float64",2.05
+2026-05-01 16:00:00,Thazhankuppam_St_12,108.1,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",2.04
+2026-05-01 16:00:00,Thazhankuppam_St_13,109.6,33.2,68.0,6.7,30.0,"industry_id
+Ashok_Leyland_Ennore    141.95
+Ashok_Leyland_Ennore    182.36
+Name: emission_intensity, dtype: float64",1.98
+2026-05-01 16:00:00,Thazhankuppam_St_14,106.3,33.2,68.0,6.7,30.0,"industry_id
+Ashok_Leyland_Ennore    141.95
+Ashok_Leyland_Ennore    182.36
+Name: emission_intensity, dtype: float64",2.02
+2026-05-01 16:00:00,Thazhankuppam_St_15,101.5,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.98
+2026-05-01 16:00:00,Thazhankuppam_St_16,96.9,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.95
+2026-05-01 16:00:00,Thazhankuppam_St_17,103.7,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.93
+2026-05-01 16:00:00,Thazhankuppam_St_18,98.4,33.2,68.0,6.7,30.0,"industry_id
+Ashok_Leyland_Ennore    141.95
+Ashok_Leyland_Ennore    182.36
+Name: emission_intensity, dtype: float64",1.98
+2026-05-01 16:00:00,Thazhankuppam_St_19,101.2,33.2,68.0,6.7,30.0,"industry_id
+Ashok_Leyland_Ennore    141.95
+Ashok_Leyland_Ennore    182.36
+Name: emission_intensity, dtype: float64",2.02
+2026-05-01 16:00:00,Thazhankuppam_St_20,112.0,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.98
+2026-05-01 16:00:00,Thazhankuppam_St_21,103.4,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.95
+2026-05-01 16:00:00,Thazhankuppam_St_22,112.5,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.93
+2026-05-01 16:00:00,Thazhankuppam_St_23,103.3,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.94
+2026-05-01 16:00:00,Thazhankuppam_St_24,101.2,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.9
+2026-05-01 16:00:00,Thazhankuppam_St_25,104.9,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.9
+2026-05-01 16:00:00,Thazhankuppam_St_26,100.0,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.84
+2026-05-01 16:00:00,Thazhankuppam_St_27,112.5,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.69
+2026-05-01 16:00:00,Thazhankuppam_St_28,102.6,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.68
+2026-05-01 16:00:00,Thazhankuppam_St_29,101.6,33.2,68.0,6.7,30.0,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.76
+2026-05-01 16:00:00,Thazhankuppam_St_30,114.7,33.2,68.0,6.7,33.5,"industry_id
+Plant_Air_Compressor    156.96
+Plant_Air_Compressor    155.44
+Name: emission_intensity, dtype: float64",1.75

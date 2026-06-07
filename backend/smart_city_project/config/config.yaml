@@ -1,0 +1,31 @@
+location:
+  latitude: 13.223097
+  longitude: 80.325079
+  description: "Thazhankuppam Area, Ennore, Chennai - Target location for AQI project"
+  num_streets_target: 30
+
+data_sources:
+  - "nearest_aqi_station_data"
+  - "local_weather_data"
+  - "traffic_congestion_data"
+  - "synthetic_industrial_pollution_data"
+  - "synthetic_street_level_aqi_data"
+
+tasks:
+  street_level_prediction:
+    target_variable: "street_level_aqi"
+    model_type: "xgboost"
+    task_type: "spatial_regression"
+    
+  aqi_forecasting:
+    target_variable: "forecasted_aqi"
+    model_type: "xgboost"
+    task_type: "time_series_forecasting"
+    forecast_horizon_hours: [6, 24]
+    forecast_interval_hours: 1
+    
+data_centric_focus:
+  - "Rigorous missing value imputation"
+  - "Outlier detection in sensor data"
+  - "Temporal feature engineering (lag, rolling means)"
+  - "Spatial feature engineering (distance to industry, traffic density)"
